@@ -2,7 +2,6 @@
 #include "esphome/core/helpers.h"
 #include "esphome/core/log.h"
 
-#sdhgfgdhdfhgksdhgisdhoigaigoi
 namespace esphome {
 namespace ads {
 

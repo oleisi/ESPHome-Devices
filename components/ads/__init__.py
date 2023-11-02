@@ -43,4 +43,4 @@ async def to_code(config):
         cg.add(var.set_button(button_out))
     if CONF_SWITCH in config:
         switch_enable = await switch.new_switch(config[CONF_SWITCH])
-        cg.add(var.set_button(switch_enable))
+        cg.add(var.set_switch(switch_enable))

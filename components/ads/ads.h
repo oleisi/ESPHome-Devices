@@ -9,7 +9,7 @@
 
 // based on https://github.com/m5stack/M5Unit-MiniEncoderC/blob/main/src/Unit_MiniEncoderC.cpp
 // https://docs.m5stack.com/en/hat/MiniEncoderC%20Hat
-
+//1234
 namespace esphome {
 namespace ads {
 

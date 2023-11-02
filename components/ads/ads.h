@@ -7,44 +7,26 @@
 #include "esphome/core/automation.h"
 #include "esphome/core/component.h"
 
-
+// based on https://github.com/m5stack/M5Unit-MiniEncoderC/blob/main/src/Unit_MiniEncoderC.cpp
+// https://docs.m5stack.com/en/hat/MiniEncoderC%20Hat
 
 namespace esphome {
-namespace ads{
+namespace ads {
 
 class ads : public i2c::I2CDevice, public Component {
  public:
   void setup() override;
   void loop() override;
-
-  void set_number(uint8_t number) { number_ = number; }
-  void set_min_value(int32_t min_value) { this->min_value_ = min_value; }
-  void set_max_value(int32_t max_value) { this->max_value_ = max_value; }
-
   float get_setup_priority() const override;
-
- 
-  void set_Enable(binary_sensor::BinarySensor* Enable) {
-    this->Enable_ = Enable;
+  void set_button(binary_sensor::BinarySensor* button) {
+    this->button_ = button;
   }
-  void set_Int(binary_sensor::BinarySensor* Int) {
-    this->Int_ = Int;
-  }
-
-
  protected:
-  uint8_t number_{0};
-  int32_t value_{0};
-
-
-  sensor::Sensor* voltage_value_{nullptr};
-  binary_sensor::BinarySensor* Enable_{nullptr};
-  binary_sensor::BinarySensor* Int_{nullptr};
-  void setSetupValue(int16_t Value);
-  void setSleepValue(int16_t Value);
-  void setWakeValue(int16_t Value);
-  
+  binary_sensor::BinarySensor* button_{nullptr};
 };
+
+
+
 
 
 }  // namespace miniencoderc

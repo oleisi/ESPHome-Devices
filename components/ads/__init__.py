@@ -13,7 +13,7 @@ DEPENDENCIES = ['i2c']
 
 ads_ns = cg.esphome_ns.namespace('ads')
 ads = ads_ns.class_('ads', i2c.I2CDevice, cg.Component)
-CONF_BUTTON = "Enable"
+CONF_Enable = "Enable"
 CONF_Int = "Int"
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(

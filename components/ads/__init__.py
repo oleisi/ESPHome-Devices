@@ -17,7 +17,7 @@ miniencoderc_ns = cg.esphome_ns.namespace('ads')
 ads = miniencoderc_ns.class_('ads', i2c.I2CDevice, cg.Component)
 CONF_BUTTON_IN = "Input"
 CONF_BUTTON_OUT = "Output"
-CONF_SWITCH = "Reset"
+CONF_SWITCH = "Reset_"
 
 
 
@@ -41,6 +41,3 @@ async def to_code(config):
     if CONF_BUTTON_OUT in config:
         button_out = await binary_sensor.new_binary_sensor(config[CONF_BUTTON_OUT])
         cg.add(var.set_button(button_out))
-    if CONF_SWITCH in config:
-        switch_enable = await switch.new_switch(config[CONF_SWITCH])
-        cg.add(var.set_switch(switch_enable))

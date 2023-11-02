@@ -41,3 +41,6 @@ async def to_code(config):
     if CONF_BUTTON_OUT in config:
         button_out = await binary_sensor.new_binary_sensor(config[CONF_BUTTON_OUT])
         cg.add(var.set_button(button_out))
+    if CONF_SWITCH in config:
+        switch_out = await switch.new_switch(config[CONF_SWITCH])
+        cg.add(var.set_switch(switch_out))

@@ -1,3 +1,10 @@
+import esphome.codegen as cg
+import esphome.config_validation as cv
+from esphome.components import binary_sensor, i2c, sensor
+from esphome.const import (
+    CONF_ID, 
+    CONF_TRIGGER_ID
+)
 MULTI_CONF = True
 
 AUTO_LOAD = [ "binary_sensor", "sensor" ]

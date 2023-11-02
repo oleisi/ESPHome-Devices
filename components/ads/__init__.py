@@ -39,7 +39,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
         cv.Optional(CONF_BUTTON_OUT): binary_sensor.binary_sensor_schema(),
         cv.Optional(CONF_SWITCH): switch.switch_schema(),
     }
-).extend(i2c.i2c_device_schema(CONF_I2C_ADDR)).extend(cv.polling_component_schema('1s'))
+).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])

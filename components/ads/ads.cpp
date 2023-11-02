@@ -22,7 +22,7 @@ float ads::get_setup_priority() const {
 void ads::setup() {
   ESP_LOGI(TAG, "Setting up ads...");
   uint8_t firmware;
-  if (this->read_register(MINI_ENCODER_C_FIRMWARE, &firmware, 1) !=
+  if (this->read_register(MINI_ADS_C_FIRMWARE, &firmware, 1) !=
       i2c::ERROR_OK) {
     ESP_LOGE(TAG, "ads Setup Failed");
     this->mark_failed();

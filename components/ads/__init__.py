@@ -15,7 +15,8 @@ DEPENDENCIES = ['i2c']
 
 miniencoderc_ns = cg.esphome_ns.namespace('ads')
 ads = miniencoderc_ns.class_('ads', i2c.I2CDevice, cg.Component)
-CONF_BUTTON = "button1"
+CONF_BUTTON_IN = "Input"
+CONF_BUTTON_OUT = "Output"
 
 
 
@@ -23,7 +24,8 @@ CONF_BUTTON = "button1"
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
     {
         cv.GenerateID(): cv.declare_id(ads),
-        cv.Optional(CONF_BUTTON): binary_sensor.binary_sensor_schema(),
+        cv.Optional(CONF_BUTTON_IN): binary_sensor.binary_sensor_schema(),
+        cv.Optional(CONF_BUTTON_OUT): binary_sensor.binary_sensor_schema(),
     }
 ).extend(i2c.i2c_device_schema(0x42))
 
@@ -32,6 +34,9 @@ async def to_code(config):
     await cg.register_component(var, config)
     await i2c.register_i2c_device(var, config)
 
-    if CONF_BUTTON in config:
-        button = await binary_sensor.new_binary_sensor(config[CONF_BUTTON])
-        cg.add(var.set_button(button))
+    if CONF_BUTTON_IN in config:
+        button_in = await binary_sensor.new_binary_sensor(config[CONF_BUTTON_IN])
+        cg.add(var.set_button(button_in))
+    if CONF_BUTTON_OUT in config:
+        button_out = await binary_sensor.new_binary_sensor(config[CONF_BUTTON_OUT])
+        cg.add(var.set_button(button_out))

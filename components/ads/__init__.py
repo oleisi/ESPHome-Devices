@@ -15,7 +15,7 @@ DEPENDENCIES = ['i2c']
 
 miniencoderc_ns = cg.esphome_ns.namespace('ads')
 ads = miniencoderc_ns.class_('ads', i2c.I2CDevice, cg.Component)
-CONF_BUTTON = "button"
+CONF_BUTTON = "button1"
 
 
 

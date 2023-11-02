@@ -26,6 +26,7 @@ CONF_CLOCK_SLEEP = "Clock Sleep"
 CONF_I2C_SLEEP = "I2C Sleep"
 
 
+
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
     {
         cv.GenerateID(): cv.declare_id(ads),
@@ -51,6 +52,5 @@ async def to_code(config):
     if CONF_BUTTON_OUT in config:
         button_out = await binary_sensor.new_binary_sensor(config[CONF_BUTTON_OUT])
         cg.add(var.set_button(button_out))
-    if CONF_SWITCH in config:
-        switch.new_switch(conf, value)
+
 

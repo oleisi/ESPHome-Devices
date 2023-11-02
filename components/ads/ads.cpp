@@ -31,7 +31,7 @@ void ads::setup() {
   ESP_LOGI(TAG, "ads Firmware: %d", firmware);
 }
 
-void ads::setSetupValue(int8_t value) {
+/*void ads::setSetupValue(int8_t value) {
   uint8_t data;
 
   data = value & 0xff;
@@ -63,7 +63,7 @@ void ads::setWakeValue(int16_t value) {
     this->mark_failed();
   }
 }
-
+*/
 void ads::loop() {
   uint8_t data[2];
   if (this->read_register(MINI_ADS_C_Status, data, 1) != i2c::ERROR_OK) {

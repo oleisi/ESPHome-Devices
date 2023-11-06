@@ -44,13 +44,13 @@ async def to_code(config):
     await i2c.register_i2c_device(var, config)
     
     if CONF_VOLTAGE in config:
-        voltage = await sensor.new_sensor(config[CONF_VOLTAGE])
-        cg.add(var.set_voltage(voltage))
+        sens = await sensor.new_sensor(config[CONF_VOLTAGE])
+        cg.add(var.set_voltage(sens))
 
     if CONF_SENSOR in config:
-        sensor = await binary_sensor.new_binary_sensor(config[CONF_SENSOR])
-        cg.add(var.set_sensor(sensor))   
+        sens = await binary_sensor.new_binary_sensor(config[CONF_SENSOR])
+        cg.add(var.set_sensor(sens))   
 
     if CONF_ENABLED in config:
-        enabled = await binary_sensor.new_binary_sensor(config[CONF_ENABLED])
-        cg.add(var.set_enabled(enabled))
+        sens = await binary_sensor.new_binary_sensor(config[CONF_ENABLED])
+        cg.add(var.set_enabled(sens))

@@ -11,14 +11,13 @@
 namespace esphome {
 namespace attiny {
 
-class attiny : public Component,  public uart::UARTDevice {
+class attiny : public Component,  public i2c::I2CDevice {
  public:
   float get_setup_priority() const override { return setup_priority::LATE; }
   void setup() override;
   void loop() override;
   void dump_config() override;
 
-  void set_the_text(text_sensor::TextSensor *text_sensor) { the_text_ = text_sensor; }
   void set_the_sensor(sensor::Sensor *sensor) { the_sensor_ = sensor; }
   void set_the_binsensor(binary_sensor::BinarySensor *sensor) { the_binsensor_ = sensor; }
 
@@ -26,7 +25,6 @@ class attiny : public Component,  public uart::UARTDevice {
   void write_float(float value);
   void ping();
  protected:
-  text_sensor::TextSensor *the_text_{nullptr};
   sensor::Sensor *the_sensor_{nullptr};
   binary_sensor::BinarySensor *the_binsensor_{nullptr};
 
@@ -61,14 +59,7 @@ class attinySwitch : public Component, public switch_::Switch {
   attiny *parent_;
 };
 
-class attinyButton : public Component, public button::Button {
- public:
-  void dump_config() override;
-  void set_parent(attiny *parent) { this->parent_ = parent; }
- protected:
-  void press_action() override;
-  attiny *parent_;
-};
+
 
 }  // namespace attiny
 }  // namespace esphome

@@ -10,7 +10,7 @@ AUTO_LOAD = ['binary_sensor', 'output', 'sensor', 'switch']
 
 attiny_ns = cg.esphome_ns.namespace('attiny')
 
-attiny = attiny_ns.class_('attiny', cg.Component, uart.UARTDevice)
+attiny = attiny_ns.class_('attiny', i2c.I2CDevice, cg.Component)
 attinyBOutput = attiny_ns.class_("attinyBOutput", output.BinaryOutput)
 attinyFOutput = attiny_ns.class_("attinyFOutput", output.FloatOutput)
 attinySwitch = attiny_ns.class_("attinySwitch", switch.Switch, cg.Component)

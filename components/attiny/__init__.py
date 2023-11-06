@@ -33,8 +33,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
             accuracy_decimals=1,
             device_class=DEVICE_CLASS_VOLTAGE
             ),
-        cv.Optional(CONF_SENSOR): binary_sensor.binary_sensor_schema(),
-        cv.Optional(CONF_ENABLED): binary_sensor.binary_sensor_schema(),
+
     }
 ).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
 

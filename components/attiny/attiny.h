@@ -16,8 +16,8 @@ class attiny : public i2c::I2CDevice, public Component {
   void dump_config() override;
 
   void set_voltage(sensor::Sensor *sensor) { voltage_ = sensor; }
-  void set_sensor(binary_sensor::BinarySensor *sensor) { sensor_ = sensor; }
-  void set_enabled(binary_sensor::BinarySensor *sensor) { enabled_ = sensor; }
+  void set_sensor(binary_sensor::BinarySensor *sensor) { sensor_ = binary_sensor; }
+  void set_enabled(binary_sensor::BinarySensor *sensor) { enabled_ = binary_sensor; }
 
 };
 

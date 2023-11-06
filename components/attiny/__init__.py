@@ -35,7 +35,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
             ),
         cv.Optional(CONF_SENSOR): binary_sensor.binary_sensor_schema(),
         cv.Optional(CONF_ENABLED): binary_sensor.binary_sensor_schema(),
-
+        cv.Optional(CONF_DEEPSLEEP): switch.SWITCH_SCHEMA.extend({cv.GenerateID(): cv.declare_id(attinyDeepSleep)}),
     }
 ).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
 
@@ -55,3 +55,7 @@ async def to_code(config):
     if CONF_ENABLED in config:
         sens = await binary_sensor.new_binary_sensor(config[CONF_ENABLED])
         cg.add(var.set_enabled(sens))
+    
+    if CONF_DEEPSLEEP in config:
+        sw = await switch.new_switch(config[CONF_DEEPSLEEP])
+        cg.add(sw.set_parent(var))

@@ -11,8 +11,6 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-      if (this->enabled_ != nullptr) {
-        this->enabled_->publish_state(WakeUpRising);
       
 }
 

@@ -25,6 +25,14 @@ class attiny : public i2c::I2CDevice, public Component {
   binary_sensor::BinarySensor *enabled_{nullptr};
 };
 
+class attinyDeepSleep : public Component, public switch_::Switch {
+ public:
+  void dump_config() override;
+  void set_parent(attiny *parent) { this->parent_ = parent; }
+ protected:
+  void write_state(bool state) override;
+  attiny *parent_;
+};
 
 }  // namespace attiny
 }  // namespace esphome

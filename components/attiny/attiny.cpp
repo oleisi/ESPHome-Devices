@@ -11,7 +11,7 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-    if (this->the_binsensor_ != nullptr)
+    if (this->set_sensor != nullptr)
       this->set_sensor->publish_state(true);
 };
 

@@ -37,7 +37,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
         cv.Optional(CONF_VOLTAGE): sensor.sensor_schema(
             unit_of_measurement=UNIT_VOLT,
             icon=ICON_FLASH,
-            accuracy_decimals=1,
+            accuracy_decimals=2,
             device_class=DEVICE_CLASS_VOLTAGE
             ),
         cv.Optional(PAR_WakeUpRising, default=True): cv.boolean,

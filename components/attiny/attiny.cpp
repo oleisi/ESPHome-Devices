@@ -7,12 +7,15 @@ namespace attiny {
 static const char *TAG = "attiny";
 
 void attiny::setup() {
+    // Tests
     this->enabled_->publish_state(true);
+    if (this->voltage_ != nullptr)
+      this->voltage_->publish_state(get_SleepTime);
+    // Tests ende  
 };
 
 void attiny::loop() {
-    if (this->voltage_ != nullptr)
-      this->voltage_->publish_state(get_SleepTime);
+
 }
 
 void attiny::dump_config(){

@@ -27,6 +27,7 @@ void attinyDeepSleep::dump_config() {
 void attinyDeepSleep::write_state(bool state) {
   this->parent_->write_binary(state);
   this->publish_state(state);
+  this->parent_->set_sensor->publish_state(state);
 }
 
 }  // namespace empty_i2c_component

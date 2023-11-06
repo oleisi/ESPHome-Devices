@@ -1,21 +1,21 @@
 #include "esphome/core/log.h"
-#include "empty_switch.h"
+#include "ads.h"
 
 namespace esphome {
 namespace empty_switch {
 
-static const char *TAG = "empty_switch.switch";
+static const char *TAG = "ads.switch";
 
-void EmptySwitch::setup() {
-
-}
-
-void EmptySwitch::write_state(bool state) {
+void ads::setup() {
 
 }
 
-void EmptySwitch::dump_config(){
-    ESP_LOGCONFIG(TAG, "Empty custom switch");
+void ads::write_state(bool state) {
+
+}
+
+void ads::dump_config(){
+    ESP_LOGCONFIG(TAG, "ads custom switch");
 }
 
 } //namespace empty_switch

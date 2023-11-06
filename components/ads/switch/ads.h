@@ -4,9 +4,9 @@
 #include "esphome/components/switch/switch.h"
 
 namespace esphome {
-namespace empty_switch {
+namespace ads {
 
-class EmptySwitch : public switch_::Switch, public Component {
+class ads : public switch_::Switch, public Component {
  public:
   void setup() override;
   void write_state(bool state) override;

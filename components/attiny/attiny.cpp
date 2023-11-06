@@ -4,7 +4,7 @@
 namespace esphome {
 namespace attiny {
 
-static const char *TAG = "attiny.component";
+static const char *TAG = "attiny";
 
 void attiny::setup() {
 

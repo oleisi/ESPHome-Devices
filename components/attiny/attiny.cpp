@@ -22,7 +22,7 @@ void attiny::write_binary(bool state) {
 
 
 void attiny::write_float(float state) {
-  this->write_str(to_string(state).c_str());
+  
 }
 
 void attinyBOutput::dump_config() {

@@ -9,9 +9,9 @@ static const char *TAG = "attiny";
 void attiny::setup() {
     // Tests
     this->enabled_->publish_state(true);
-    float sleepTime = get_SleepTime/1000;
+    float sleepTime = (float)get_SleepTime/1000;
     if (this->voltage_ != nullptr)
-      this->voltage_->publish_state(sleepTime);
+      this->voltage_->publish_state((float)sleepTime);
     // Tests ende  
 };
 

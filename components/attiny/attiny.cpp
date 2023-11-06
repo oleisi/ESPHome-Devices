@@ -11,7 +11,8 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-
+      if (this->enabled_ != nullptr) {
+        this->enabled_->publish_state(WakeUpRising);
       
 };
 
@@ -23,6 +24,12 @@ void attiny::write_binary(bool state) {
         this->sensor_->publish_state(state);
     }
 }
+void attiny::set_WakeUpRising(bool state) {
+      if (this->enabled_ != nullptr) {
+        this->enabled_->publish_state(state);
+    }
+}
+
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);
 };

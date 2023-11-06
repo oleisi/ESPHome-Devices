@@ -25,7 +25,7 @@ class attiny : public i2c::I2CDevice, public Component {
   void set_enabled(binary_sensor::BinarySensor *sensor) { enabled_ = sensor; }
   
   void write_binary(bool value);
-  
+  bool WakeUpRising = false;
  protected:
   sensor::Sensor *voltage_{nullptr};
   binary_sensor::BinarySensor *sensor_{nullptr};

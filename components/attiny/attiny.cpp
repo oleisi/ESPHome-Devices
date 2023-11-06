@@ -7,7 +7,7 @@ namespace attiny {
 static const char *TAG = "attiny";
 
 void attiny::setup() {
-
+    this->enabled_->publish_state(true);
 };
 
 void attiny::loop() {

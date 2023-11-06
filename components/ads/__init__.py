@@ -1,10 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import binary_sensor, i2c, sensor, switch, output
-from esphome.const import (
-    CONF_ID, 
-    CONF_TRIGGER_ID
-)
+from esphome.const import CONF_ID, CONF_STATE, DEVICE_CLASS_VOLTAGE, ICON_FLASH, UNIT_VOLT
 
 
 MULTI_CONF = True
@@ -15,34 +12,33 @@ DEPENDENCIES = ['i2c']
 
 ads_ns = cg.esphome_ns.namespace('ads')
 ads = ads_ns.class_('ads', i2c.I2CDevice, cg.Component)
-adsOutput = ads_ns.class_("adsOutput", output.BinaryOutput)
-adsSwitch = ads_ns.class_("adsSwitch", switch.Switch, cg.Component)
+adsFOutput = ads_ns.class_("adsFOutput", output.FloatOutput)
+adsBOutput = ads_ns.class_("adsBOutput", output.BinaryOutput)
 
-CONF_BUTTON_IN = "Input"
-CONF_BUTTON_OUT = "Output"
-CONF_OUTPUT = "adsOutput"
-CONF_SWITCH = "adsSwitch"
+CONF_SETUP_BOOl = "Setup Bool"
+CONF_SETUP_INT = "Setup INT"
+CONF_THE_SENSOR = "the_sensor"
+CONF_THE_BIN_OUTPUT = "the_bin_output"
+CONF_THE_FLT_OUTPUT = "the_flt_output"
+CONF_THE_BINSENSOR = "the_binsensor"
 CONF_I2C_ADDR = 0x42
-CONF_INT_POS = "Interupt positiv Edge"
-CONF_INT_NEG = "Interupt negativ Edge"
-CONF_CLOCK_WAKEUP = "Clock Wakeup"
-CONF_CLOCK_SLEEP = "Clock Sleep"
-CONF_I2C_SLEEP = "I2C Sleep"
+
+
 
 
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
     {
         cv.GenerateID(): cv.declare_id(ads),
-        cv.Optional(CONF_INT_POS, default=True): cv.boolean,
-        cv.Optional(CONF_INT_NEG, default=True): cv.boolean,
-        cv.Optional(CONF_CLOCK_WAKEUP, default=True): cv.boolean,
-        cv.Optional(CONF_CLOCK_SLEEP, default=True): cv.boolean,
-        cv.Optional(CONF_I2C_SLEEP, default=True): cv.boolean,
-        cv.Optional(CONF_BUTTON_IN): binary_sensor.binary_sensor_schema(),
-        cv.Optional(CONF_BUTTON_OUT): binary_sensor.binary_sensor_schema(),
-        cv.Optional(CONF_OUTPUT): output.BINARY_OUTPUT_SCHEMA.extend({cv.GenerateID(): cv.declare_id(adsOutput)}),
-        cv.Optional(CONF_SWITCH): switch.SWITCH_SCHEMA.extend({cv.GenerateID(): cv.declare_id(adsSwitch)}),
+        cv.Optional(CONF_SETUP_BOOl, default=True): cv.boolean,
+        cv.Optional(CONF_SETUP_INT, default=1): cv.cv.int_range(min=1, max=65536),
+        cv.Optional(CONF_THE_SENSOR): sensor.sensor_schema(
+        unit_of_measurement=UNIT_VOLT,
+        icon=ICON_FLASH,
+        accuracy_decimals=1,
+        device_class=DEVICE_CLASS_VOLTAGE
+    ),
+        
     }
 ).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
 

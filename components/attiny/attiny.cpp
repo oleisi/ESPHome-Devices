@@ -22,6 +22,10 @@ void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);
 };
 
+void attinyDeepSleep::write_state(bool state) {
+  this->parent_->write_binary(state);
+  this->publish_state(state);
+}
 
 }  // namespace empty_i2c_component
 }  // namespace esphome

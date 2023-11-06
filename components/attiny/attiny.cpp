@@ -11,7 +11,7 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-    this->sensor_->publish_state(this->WakeUpRising)
+
       
 };
 

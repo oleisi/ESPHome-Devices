@@ -52,8 +52,6 @@ async def to_code(config):
     await cg.register_component(var, config)
     await i2c.register_i2c_device(var, config)
     
-    if PAR_WakeUpRising in config:
-        cg.add(var.set_WakeUpRising(PAR_WakeUpRising))
 
     if CONF_VOLTAGE in config:
         sens = await sensor.new_sensor(config[CONF_VOLTAGE])

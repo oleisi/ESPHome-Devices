@@ -18,7 +18,7 @@ void attiny::dump_config(){
     ESP_LOGCONFIG(TAG, "attiny I2C component");  
 }
 
-void UARTDemoSwitch::dump_config() {
+void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);
 }
 

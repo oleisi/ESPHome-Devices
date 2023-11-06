@@ -11,8 +11,8 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-      
-      this->enabled_->publish_state(get_WakeUpRising);
+    if (this->voltage_ != nullptr)
+      this->voltage_->publish_state(parse_number<float>(get_SleepTime).value_or(0));
 }
 
 void attiny::dump_config(){

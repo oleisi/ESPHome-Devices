@@ -10,7 +10,7 @@ void attiny::setup() {
     // Tests
     this->enabled_->publish_state(true);
     if (this->voltage_ != nullptr)
-      this->voltage_->publish_state(get_SleepTime);
+      this->voltage_->publish_state(get_SleepTime/1000);
     // Tests ende  
 };
 

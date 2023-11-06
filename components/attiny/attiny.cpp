@@ -12,7 +12,7 @@ void attiny::setup() {
 
 void attiny::loop() {
     if (this->voltage_ != nullptr)
-      this->voltage_->publish_state(parse_number<float>(get_SleepTime).value_or(0));
+      this->voltage_->publish_state(get_SleepTime);
 }
 
 void attiny::dump_config(){

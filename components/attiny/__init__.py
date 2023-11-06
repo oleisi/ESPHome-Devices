@@ -26,7 +26,7 @@ PAR_WakeUpRising = "WakeUpRising"
 PAR_WakeUpFalling = "WakeUpFalling"
 PAR_WakeUpClock = "WakeUpClock"
 PAR_SleepI2C = "SleepI2C"
-PAR_SleepClock = "SleepClock "
+PAR_SleepClock = "SleepClock"
 PAR_SleepTime   = "SleepTime"
 PAR_WakeTime = "WakeTime"
 

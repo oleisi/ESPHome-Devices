@@ -11,6 +11,11 @@ class attiny : public i2c::I2CDevice, public Component {
   void setup() override;
   void loop() override;
   void dump_config() override;
+
+  void set_the_sensor(sensor::Sensor *sensor) { the_sensor_ = sensor; }
+  void set_the_binsensor(binary_sensor::BinarySensor *sensor) { the_binsensor_ = sensor; }
+  void set_the_binsensor(binary_sensor::BinarySensor *sensor) { the_binsensor_ = sensor; }
+
 };
 
 

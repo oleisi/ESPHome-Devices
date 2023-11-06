@@ -5,7 +5,7 @@ from esphome.const import (
     CONF_ID, 
     CONF_TRIGGER_ID
 )
-
+from esphome.components.ads.switch import switch
 
 MULTI_CONF = True
 

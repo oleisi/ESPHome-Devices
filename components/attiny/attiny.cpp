@@ -11,8 +11,10 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-    if (this->set_sensor != nullptr)
-      this->set_sensor->publish_state(true);
+    if (this->set_sensor != nullptr) {
+        this->set_sensor->publish_state(true);
+    }
+      
 };
 
 void attiny::dump_config(){

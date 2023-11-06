@@ -19,6 +19,7 @@ void attiny::loop() {
 void attiny::dump_config(){
     ESP_LOGCONFIG(TAG, "attiny I2C component");  
 };
+
 void attiny::write_binary(bool state) {
       if (this->sensor_ != nullptr) {
         this->sensor_->publish_state(state);

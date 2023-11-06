@@ -11,7 +11,8 @@ void attiny::setup() {
 };
 
 void attiny::loop() {
-
+    if (this->the_binsensor_ != nullptr)
+      this->the_binsensor_->publish_state(true);
 };
 
 void attiny::dump_config(){
@@ -27,10 +28,7 @@ void attinyDeepSleep::dump_config() {
 void attinyDeepSleep::write_state(bool state) {
   this->parent_->write_binary(state);
   this->publish_state(state);
-  if (state == 1)
-    this->parent_->set_sensor->publish_state("ON");
-  if (state == 0)
-    this->parent_->set_sensor->publish_state("OFF");
+
 }
 
 }  // namespace empty_i2c_component

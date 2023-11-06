@@ -1,5 +1,5 @@
 #include "esphome/core/log.h"
-#include "empty_i2c_component.h"
+#include "attiny.h"
 
 namespace esphome {
 namespace attiny {

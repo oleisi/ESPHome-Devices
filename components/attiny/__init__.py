@@ -22,6 +22,13 @@ CONF_VOLTAGE = "Voltage"
 CONF_SENSOR = "Sensor"
 CONF_ENABLED = "Enabled"
 CONF_DEEPSLEEP = "DeepSleep"
+PAR_WakeUpRising = "WakeUpRising"
+PAR_WakeUpFalling = "WakeUpFalling"
+PAR_WakeUpClock = "WakeUpClock"
+PAR_SleepI2C = "SleepI2C"
+PAR_SleepClock = "SleepClock "
+PAR_SleepTime   = "SleepTime"
+PAR_WakeTime = "WakeTime"
 
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
@@ -33,6 +40,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
             accuracy_decimals=1,
             device_class=DEVICE_CLASS_VOLTAGE
             ),
+        cv.Optional(PAR_WakeUpRising, default=True): cv.bool,
         cv.Optional(CONF_SENSOR): binary_sensor.binary_sensor_schema(),
         cv.Optional(CONF_ENABLED): binary_sensor.binary_sensor_schema(),
         cv.Optional(CONF_DEEPSLEEP): switch.SWITCH_SCHEMA.extend({cv.GenerateID(): cv.declare_id(attinyDeepSleep)}),
@@ -44,6 +52,9 @@ async def to_code(config):
     await cg.register_component(var, config)
     await i2c.register_i2c_device(var, config)
     
+    if PAR_WakeUpRising in config:
+        cg.add(var.set_WakeUpRising(PAR_WakeUpRising))
+
     if CONF_VOLTAGE in config:
         sens = await sensor.new_sensor(config[CONF_VOLTAGE])
         cg.add(var.set_voltage(sens))

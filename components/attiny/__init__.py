@@ -14,7 +14,6 @@ AUTO_LOAD = ['binary_sensor', 'button', 'output', 'sensor', 'switch', 'text_sens
 CONF_I2C_ADDR = 0x42
 
 attiny_ns = cg.esphome_ns.namespace('attiny')
-
 attiny = attiny_ns.class_('attiny', i2c.I2CDevice, cg.Component)
 attinyDeepSleep = attiny_ns.class_("Deep Sleep", switch.Switch, cg.Component)
 

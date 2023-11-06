@@ -27,7 +27,7 @@ attiny:
     id: enabled
 
 # Outputs, to Attiny
-  DeepSleep:            @ optional, switch
+  DeepSleep:            # optional, switch
     
 
 

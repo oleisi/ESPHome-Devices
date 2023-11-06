@@ -15,7 +15,7 @@ void attiny::loop() {
 }
 
 void attiny::dump_config(){
-    ESP_LOGCONFIG(TAG, "attiny I2C component");
+    ESP_LOGCONFIG(TAG, "attiny I2C component");  
 }
 
 

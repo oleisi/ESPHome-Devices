@@ -28,7 +28,7 @@ void attinyDeepSleep::dump_config() {
 };
 
 void attinyDeepSleep::write_state(bool state) {
-  this->parent_->write_binary(state);
+  this->parent_->sensor_->publish_state(state);
   this->publish_state(state);
 
 }

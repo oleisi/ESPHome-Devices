@@ -36,25 +36,21 @@ void attiny::setup() {
    
     ESP_LOGD(TAG, "Datasetup: %d", DataSetup);
   */ 
-  uint8_t Data[5];
-    if (SleepI2C) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (SleepClock) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (WakeUpClock) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (WakeUpFalling) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (WakeUpRising) {Data[0] = Data[0] + 1;};
-    Data[1] = WakeTime & 0xff;
-    Data[2] = (WakeTime >> 8) & 0xff;
-    Data[3] = WakeTime & 0xff;
-    Data[4] = (WakeTime >> 8) & 0xff;
-    ESP_LOGD(TAG, "Data[0]: %d", Data[0]);
-    ESP_LOGD(TAG, "Data[1]: %d", Data[1]);
-    ESP_LOGD(TAG, "Data[2]: %d", Data[2]);
-    ESP_LOGD(TAG, "Data[3]: %d", Data[3]);
-    ESP_LOGD(TAG, "Data[4]: %d", Data[4]);
+  uint8_t DataSend[5];
+    if (SleepI2C) {DataSend[0] = DataSend[0] + 1;};
+    DataSend[0] = DataSend[0] << 1;
+    if (SleepClock) {DataSend[0] = DataSend[0] + 1;};
+    DataSend[0] = DataSend[0] << 1;
+    if (WakeUpClock) {DataSend[0] = DataSend[0] + 1;};
+    DataSend[0] = DataSend[0] << 1;
+    if (WakeUpFalling) {DataSend[0] = DataSend[0] + 1;};
+    DataSend[0] = DataSend[0] << 1;
+    if (WakeUpRising) {DataSend[0] = DataSend[0] + 1;};
+    DataSend[1] = WakeTime & 0xff;
+    DataSend[2] = (WakeTime >> 8) & 0xff;
+    DataSend[3] = WakeTime & 0xff;
+    DataSend[4] = (WakeTime >> 8) & 0xff;
+    DataSend[5] = 0;
 
 };
 
@@ -63,25 +59,20 @@ void attiny::loop() {
 }
 void attiny::update() {
 
-    uint8_t Data[5];
-    if (SleepI2C) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (SleepClock) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (WakeUpClock) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (WakeUpFalling) {Data[0] = Data[0] + 1;};
-    Data[0] = Data[0] << 1;
-    if (WakeUpRising) {Data[0] = Data[0] + 1;};
-    Data[1] = SleepTime & 0xff;
-    Data[2] = (SleepTime >> 8) & 0xff;
-    Data[3] = WakeTime & 0xff;
-    Data[4] = (WakeTime >> 8) & 0xff;
-    ESP_LOGD(TAG, "Data[0]: %d", Data[0]);
-    ESP_LOGD(TAG, "Data[1]: %d", Data[1]);
-    ESP_LOGD(TAG, "Data[2]: %d", Data[2]);
-    ESP_LOGD(TAG, "Data[3]: %d", Data[3]);
-    ESP_LOGD(TAG, "Data[4]: %d", Data[4]); 
+    ESP_LOGD(TAG, "DataSend[0]: %d", DataSend[0]);
+    ESP_LOGD(TAG, "DataSend[1]: %d", DataSend[1]);
+    ESP_LOGD(TAG, "DataSend[2]: %d", DataSend[2]);
+    ESP_LOGD(TAG, "DataSend[3]: %d", DataSend[3]);
+    ESP_LOGD(TAG, "DataSend[4]: %d", DataSend[4]);
+    ESP_LOGD(TAG, "DataSend[5]: %d", DataSend[5]);
+    if ( DataSend[5] == 0;){
+      DataSend[5] = 1;
+    } else {
+      DataSend[5] = 0;
+
+    }
+
+    
 }
 void attiny::dump_config(){
     ESP_LOGCONFIG(TAG, "attiny I2C component");  

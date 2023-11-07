@@ -28,25 +28,25 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   void set_enabled(binary_sensor::BinarySensor *sensor) { enabled_ = sensor; }
   
   void write_binary(bool value);
-  void set_WakeUpRising(bool state){ this->get_WakeUpRising = state;}
-  void set_WakeUpFalling(bool state){ this->get_WakeUpFalling = state;}
-  void set_WakeUpClock(bool state){ this->get_WakeUpClock = state;}
-  void set_SleepI2C(bool state){ this->get_SleepI2C = state; }
-  void set_SleepClock(bool state){ this->get_SleepClock = state; }
-  void set_SleepTime(uint16_t value){ this->get_SleepTime = value; }
-  void set_WakeTime(uint16_t value){ this->get_WakeTime = value; }
+  void set_WakeUpRising(bool state){ this->WakeUpRising = state;}
+  void set_WakeUpFalling(bool state){ this->WakeUpFalling = state;}
+  void set_WakeUpClock(bool state){ this->WakeUpClock = state;}
+  void set_SleepI2C(bool state){ this->SleepI2C = state; }
+  void set_SleepClock(bool state){ this->SleepClock = state; }
+  void set_SleepTime(uint16_t value){ this->SleepTime = value; }
+  void set_WakeTime(uint16_t value){ this->WakeTime = value; }
   
  protected:
   sensor::Sensor *voltage_{nullptr};
   binary_sensor::BinarySensor *sensor_{nullptr};
   binary_sensor::BinarySensor *enabled_{nullptr};
-  bool get_WakeUpRising;
-  bool get_WakeUpFalling;
-  bool get_WakeUpClock;
-  bool get_SleepI2C;
-  bool get_SleepClock;
-  uint16_t get_SleepTime;
-  uint16_t get_WakeTime;
+  bool WakeUpRising;
+  bool WakeUpFalling;
+  bool WakeUpClock;
+  bool SleepI2C;
+  bool SleepClock;
+  uint16_t SleepTime;
+  uint16_t WakeTime;
 
 };
 

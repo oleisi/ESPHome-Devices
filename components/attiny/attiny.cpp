@@ -34,9 +34,7 @@ void attiny::setup() {
     DataSetup = DataSetup << 1;
     if (WakeUpRising) {DataSetup = DataSetup + 1;};
    
-    std::string variable(DataSetup);
-    ESP_LOGD(TAG, "Datasetup: ");
-    ESP_LOGD(TAG, string);
+    ESP_LOGD(TAG, "Datasetup: %d" DataSetup);
 };
 
 void attiny::loop() {

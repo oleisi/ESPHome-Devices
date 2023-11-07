@@ -19,7 +19,7 @@ class attiny : public i2c::I2CDevice, public Component {
   attiny() : PollingComponent(1000) {}
   float get_setup_priority() const override { return setup_priority::HARDWARE_LATE; }
   void setup() override;
-  //void loop() override;
+  void loop() override;
   void update() override;
   void dump_config() override;
 

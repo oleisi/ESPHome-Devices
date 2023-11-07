@@ -79,7 +79,7 @@ void attiny::update() {
     ESP_LOGE(TAG, "Attiny read Setup Failed");
     //this->mark_failed();
   }
-    ESP_LOGD(TAG, "DataSend[5]: %d", DataReciev[0]);
+    ESP_LOGD(TAG, "DataReciev[5]: %d", DataReciev[0]);
     
 }
 void attiny::dump_config(){

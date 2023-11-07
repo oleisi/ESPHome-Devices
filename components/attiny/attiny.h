@@ -27,6 +27,8 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   void set_sensor(binary_sensor::BinarySensor *sensor) { sensor_ = sensor; }
   void set_enabled(binary_sensor::BinarySensor *sensor) { enabled_ = sensor; }
   
+  void deep_sleep();
+  void read_I2C();
   void write_binary(bool value);
   void set_WakeUpRising(bool state){ this->WakeUpRising = state;}
   void set_WakeUpFalling(bool state){ this->WakeUpFalling = state;}

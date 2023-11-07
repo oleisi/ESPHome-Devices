@@ -14,47 +14,26 @@ void attiny::setup() {
     this->voltage_->publish_state(get_SleepTime/1000.0);
     };
     get_SleepTime = get_SleepTime+10;
-    
-    
-  bool WakeUpRising;
-  bool WakeUpFalling;
-  bool WakeUpClock;
-  bool SleepI2C;
-  bool SleepClock;
-   uint16_t SleepTime;
-  uint16_t WakeTime;
-      uint8_t DataSetup;
-    if (SleepI2C) {DataSetup = DataSetup + 1;};
-    DataSetup = DataSetup << 1;
-    if (SleepClock) {DataSetup = DataSetup + 1;};
-    DataSetup = DataSetup << 1;
-    if (WakeUpClock) {DataSetup = DataSetup + 1;};
-    DataSetup = DataSetup << 1;
-    if (WakeUpFalling) {DataSetup = DataSetup + 1;};
-    DataSetup = DataSetup << 1;
-    if (WakeUpRising) {DataSetup = DataSetup + 1;};
-   
-    ESP_LOGD(TAG, "Datasetup: %d", DataSetup);
+
   */ 
-    DataSend[0] = 0;
-    if (SleepI2C) {DataSend[0] = DataSend[0] + 1;};
-    DataSend[0] = DataSend[0] << 1;
-    if (SleepClock) {DataSend[0] = DataSend[0] + 1;};
-    DataSend[0] = DataSend[0] << 1;
-    if (WakeUpClock) {DataSend[0] = DataSend[0] + 1;};
-    DataSend[0] = DataSend[0] << 1;
-    if (WakeUpFalling) {DataSend[0] = DataSend[0] + 1;};
-    DataSend[0] = DataSend[0] << 1;
-    if (WakeUpRising) {DataSend[0] = DataSend[0] + 1;};
-    DataSend[1] = SleepTime & 0xff;
-    DataSend[2] = (SleepTime >> 8) & 0xff;
-    DataSend[3] = WakeTime & 0xff;
-    DataSend[4] = (WakeTime >> 8) & 0xff;
-    DataSend[5] = 0;
-    if (this->write_register(0x00, DataSend, 5) != i2c::ERROR_OK) {
+    I2C_Data[0] = 0;
+    if (SleepI2C) {I2C_Data[0] = I2C_Data[0] + 1;};
+    I2C_Data[0] = I2C_Data[0] << 1;
+    if (SleepClock) {I2C_Data[0] = I2C_Data[0] + 1;};
+    I2C_Data[0] = I2C_Data[0] << 1;
+    if (WakeUpClock) {I2C_Data[0] = I2C_Data[0] + 1;};
+    I2C_Data[0] = I2C_Data[0] << 1;
+    if (WakeUpFalling) {I2C_Data[0] = I2C_Data[0] + 1;};
+    I2C_Data[0] = I2C_Data[0] << 1;
+    if (WakeUpRising) {I2C_Data[0] = I2C_Data[0] + 1;};
+    I2C_Data[1] = SleepTime & 0xff;
+    I2C_Data[2] = (SleepTime >> 8) & 0xff;
+    I2C_Data[3] = WakeTime & 0xff;
+    I2C_Data[4] = (WakeTime >> 8) & 0xff;
+    if (this->write_register(0x00, I2C_Data, 5) != i2c::ERROR_OK) {
       ESP_LOGE(TAG, "Attiny write Setup Failed");
       this->mark_failed();
-      }
+      };
 };
 
 void attiny::loop() {

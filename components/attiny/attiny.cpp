@@ -36,7 +36,7 @@ void attiny::setup() {
    
     ESP_LOGD(TAG, "Datasetup: %d", DataSetup);
   */ 
-
+    DataSend[0] = 0;
     if (SleepI2C) {DataSend[0] = DataSend[0] + 1;};
     DataSend[0] = DataSend[0] << 1;
     if (SleepClock) {DataSend[0] = DataSend[0] + 1;};

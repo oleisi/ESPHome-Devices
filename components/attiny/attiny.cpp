@@ -9,15 +9,18 @@ static const char *TAG = "attiny";
 void attiny::setup() {
     // Tests
     this->enabled_->publish_state(true);
-    if (this->voltage_ != nullptr)
-      this->voltage_->publish_state(get_SleepTime/1000.0);
-    // Tests ende  
+    // Tests ende 
 };
 
 void attiny::loop() {
 
 }
-
+void attiny::update() {
+  if (this->voltage_ != nullptr)
+    this->voltage_->publish_state(get_SleepTime/1000.0);
+    get_SleepTime = get_SleepTime+10;
+     
+}
 void attiny::dump_config(){
     ESP_LOGCONFIG(TAG, "attiny I2C component");  
 }

@@ -72,7 +72,7 @@ void attiny::deep_sleep() {
 }
 void attiny::read_I2C(bool initial) {
   // read 0x05    Voltage [mV] lsb uint16_t
-  uint8_t Data [3];
+  /*uint8_t Data [3];
   if (this->read_register(0x05, Data, 3) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
@@ -93,7 +93,7 @@ void attiny::read_I2C(bool initial) {
       ESP_LOGE(TAG, "Attiny I2C Failed");
       this->mark_failed();
       };
-    };
+    };*/
 
   
   Enable = (I2C_Data[7]& 0x01) == 0x01;

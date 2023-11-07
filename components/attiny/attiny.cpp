@@ -73,8 +73,8 @@ void attiny::update() {
     if (WakeUpFalling) {Data[0] = Data[0] + 1;};
     Data[0] = Data[0] << 1;
     if (WakeUpRising) {Data[0] = Data[0] + 1;};
-    Data[1] = WakeTime & 0xff;
-    Data[2] = (WakeTime >> 8) & 0xff;
+    Data[1] = SleepTime & 0xff;
+    Data[2] = (SleepTime >> 8) & 0xff;
     Data[3] = WakeTime & 0xff;
     Data[4] = (WakeTime >> 8) & 0xff;
     ESP_LOGD(TAG, "Data[0]: %d", Data[0]);

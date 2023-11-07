@@ -65,12 +65,12 @@ void attiny::update() {
     ESP_LOGD(TAG, "DataSend[3]: %d", DataSend[3]);
     ESP_LOGD(TAG, "DataSend[4]: %d", DataSend[4]);
     ESP_LOGD(TAG, "DataSend[5]: %d", DataSend[5]);
-    if ( DataSend[5] == 0;){
+    if ( DataSend[5] == 0){
       DataSend[5] = 1;
     } else {
       DataSend[5] = 0;
 
-    }
+    };
 
     
 }

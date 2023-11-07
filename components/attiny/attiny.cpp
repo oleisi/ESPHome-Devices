@@ -16,6 +16,7 @@ void attiny::setup() {
     get_SleepTime = get_SleepTime+10;
 
   */ 
+   /*
     I2C_Data[0] = 0;
     if (SleepI2C) {I2C_Data[0] = I2C_Data[0] + 1;};
     I2C_Data[0] = I2C_Data[0] << 1;
@@ -34,8 +35,13 @@ void attiny::setup() {
       ESP_LOGE(TAG, "Attiny write Setup Failed");
       this->mark_failed();
       };
-    
-    read_I2C(true);
+    */
+    //read_I2C(true);
+    uint8_t Data [3];
+    if (this->read_register(0x05, Data, 3) != i2c::ERROR_OK) {
+    ESP_LOGE(TAG, "Attiny I2C Failed");
+    this->mark_failed();
+    }:
 };
 
 void attiny::loop() {
@@ -66,7 +72,8 @@ void attiny::deep_sleep() {
 }
 void attiny::read_I2C(bool initial) {
   // read 0x05    Voltage [mV] lsb uint16_t
-  if (this->read_register(0x05, I2C_Data[5], 1) != i2c::ERROR_OK) {
+  uint8_t Data [3];
+  if (this->read_register(0x05, Data, 3) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
     }:

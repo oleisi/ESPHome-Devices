@@ -58,14 +58,15 @@ void attiny::write_binary(bool state) {
         this->sensor_->publish_state(state);
     }
 }
-void attiny::deep_sleep(){
+void attiny::deep_sleep() {
 
-};
-void attiny::read_I2C(){
+}
+void attiny::read_I2C() {
   if (this->read_register(0x05, I2C_Data, 3) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny read Setup Failed");
     //this->mark_failed();
-};
+  };
+}
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);
 }

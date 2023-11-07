@@ -63,7 +63,7 @@ void attiny::loop() {
 }
 void attiny::update() {
 
-      uint8_t Data[5];
+    uint8_t Data[5];
     if (SleepI2C) {Data[0] = Data[0] + 1;};
     Data[0] = Data[0] << 1;
     if (SleepClock) {Data[0] = Data[0] + 1;};
@@ -73,10 +73,10 @@ void attiny::update() {
     if (WakeUpFalling) {Data[0] = Data[0] + 1;};
     Data[0] = Data[0] << 1;
     if (WakeUpRising) {Data[0] = Data[0] + 1;};
-    data[1] = WakeTime & 0xff;
-    data[2] = (WakeTime >> 8) & 0xff;
-    data[3] = WakeTime & 0xff;
-    data[4] = (WakeTime >> 8) & 0xff;
+    Data[1] = WakeTime & 0xff;
+    Data[2] = (WakeTime >> 8) & 0xff;
+    Data[3] = WakeTime & 0xff;
+    Data[4] = (WakeTime >> 8) & 0xff;
     ESP_LOGD(TAG, "Data[0]: %d", Data[0]);
     ESP_LOGD(TAG, "Data[1]: %d", Data[1]);
     ESP_LOGD(TAG, "Data[2]: %d", Data[2]);

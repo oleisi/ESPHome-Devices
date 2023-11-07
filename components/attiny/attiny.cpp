@@ -71,7 +71,7 @@ void attiny::update() {
       DataSend[5] = 0;
 
     };
-  if (this->write_register(0x00, DataSend, 4) != i2c::ERROR_OK) {
+  if (this->write_register(0x00, DataSend, 5) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny Setup Failed");
     //this->mark_failed();
   }

@@ -93,7 +93,7 @@ void attiny::read_I2C(bool initial) {
       ESP_LOGE(TAG, "Attiny I2C Failed");
       this->mark_failed();
       };
-    };*/
+    };
 
   
   Enable = (I2C_Data[7]& 0x01) == 0x01;
@@ -110,7 +110,7 @@ void attiny::read_I2C(bool initial) {
     if (this->sensor_ != nullptr) {
       this->sensor_->publish_state(Sensor);
     };
-  }
+  }*/
 }
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);

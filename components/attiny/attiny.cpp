@@ -16,8 +16,9 @@ void attiny::loop() {
 
 }
 void attiny::update() {
-  if (this->voltage_ != nullptr)
+    if (this->voltage_ != nullptr){
     this->voltage_->publish_state(get_SleepTime/1000.0);
+    };
     get_SleepTime = get_SleepTime+10;
      
 }

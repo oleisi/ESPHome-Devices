@@ -14,7 +14,7 @@
 namespace esphome {
 namespace attiny {
 
-class attiny : public i2c::I2CDevice, public Component {
+class attiny : public i2c::I2CDevice, public PollingComponent {
  public:
   attiny() : PollingComponent(1000) {}
   float get_setup_priority() const override { return setup_priority::HARDWARE_LATE; }

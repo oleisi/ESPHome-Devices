@@ -37,5 +37,10 @@ attiny:
 [12:37:33][D][attiny:083]: Data[3]: 3
 [12:37:33][D][attiny:084]: Data[4]: 2
 
-
+[12:50:06][D][attiny:062]: DataSend[0]: 26
+[12:50:06][D][attiny:063]: DataSend[1]: 3
+[12:50:06][D][attiny:064]: DataSend[2]: 2
+[12:50:06][D][attiny:065]: DataSend[3]: 3
+[12:50:06][D][attiny:066]: DataSend[4]: 2
+[12:50:06][D][attiny:067]: DataSend[5]: 1
 

@@ -46,8 +46,8 @@ void attiny::setup() {
     if (WakeUpFalling) {DataSend[0] = DataSend[0] + 1;};
     DataSend[0] = DataSend[0] << 1;
     if (WakeUpRising) {DataSend[0] = DataSend[0] + 1;};
-    DataSend[1] = WakeTime & 0xff;
-    DataSend[2] = (WakeTime >> 8) & 0xff;
+    DataSend[1] = SleepTime & 0xff;
+    DataSend[2] = (SleepTime >> 8) & 0xff;
     DataSend[3] = WakeTime & 0xff;
     DataSend[4] = (WakeTime >> 8) & 0xff;
     DataSend[5] = 0;

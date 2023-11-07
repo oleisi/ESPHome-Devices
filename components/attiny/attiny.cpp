@@ -51,7 +51,10 @@ void attiny::setup() {
     DataSend[3] = WakeTime & 0xff;
     DataSend[4] = (WakeTime >> 8) & 0xff;
     DataSend[5] = 0;
-
+    if (this->write_register(0x00, DataSend, 5) != i2c::ERROR_OK) {
+      ESP_LOGE(TAG, "Attiny write Setup Failed");
+      this->mark_failed();
+      }
 };
 
 void attiny::loop() {
@@ -59,23 +62,8 @@ void attiny::loop() {
 }
 void attiny::update() {
 
-    ESP_LOGD(TAG, "DataSend[0]: %d", DataSend[0]);
-    ESP_LOGD(TAG, "DataSend[1]: %d", DataSend[1]);
-    ESP_LOGD(TAG, "DataSend[2]: %d", DataSend[2]);
-    ESP_LOGD(TAG, "DataSend[3]: %d", DataSend[3]);
-    ESP_LOGD(TAG, "DataSend[4]: %d", DataSend[4]);
-    ESP_LOGD(TAG, "DataSend[5]: %d", DataSend[5]);
-    if ( DataSend[5] == 0){
-      DataSend[5] = 1;
-    } else {
-      DataSend[5] = 0;
 
-    };
-  if (this->write_register(0x00, DataSend, 6) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny write Setup Failed");
-    //this->mark_failed();
-  }
-  if (this->read_register(0x00, DataReciev, 1) != i2c::ERROR_OK) {
+  if (this->read_register(0x01, DataReciev, 2) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny read Setup Failed");
     //this->mark_failed();
   }

@@ -45,6 +45,7 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   bool WakeUpClock;
   bool SleepI2C;
   bool SleepClock;
+  bool LastSleep;
   uint16_t SleepTime;
   uint16_t WakeTime;
   uint8_t DataSend[6];

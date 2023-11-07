@@ -23,6 +23,13 @@ void attiny::setup() {
   bool SleepClock;
   */ 
      
+
+};
+
+void attiny::loop() {
+
+}
+void attiny::update() {
     uint8_t DataSetup;
     if (SleepI2C) {DataSetup = DataSetup + 1;};
     DataSetup = DataSetup << 1;
@@ -35,13 +42,6 @@ void attiny::setup() {
     if (WakeUpRising) {DataSetup = DataSetup + 1;};
    
     ESP_LOGD(TAG, "Datasetup: %d", DataSetup);
-};
-
-void attiny::loop() {
-
-}
-void attiny::update() {
-
      
 }
 void attiny::dump_config(){

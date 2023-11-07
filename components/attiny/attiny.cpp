@@ -62,7 +62,7 @@ void attiny::deep_sleep(){
 
 };
 void attiny::read_I2C(){
-  if (this->read_register(0x05, DataReciev, 3) != i2c::ERROR_OK) {
+  if (this->read_register(0x05, I2C_Data, 3) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny read Setup Failed");
     //this->mark_failed();
 };

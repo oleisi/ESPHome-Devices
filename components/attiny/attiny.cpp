@@ -42,7 +42,6 @@ void attiny::loop() {
 
 }
 void attiny::update() {
-read_I2C();
 /*
   if (this->read_register(0x02, DataReciev, 2) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny read Setup Failed");
@@ -50,6 +49,8 @@ read_I2C();
   }
     ESP_LOGD(TAG, "DataReciev[5]: %d", DataReciev[0]);
     */
+   
+    read_I2C(false);
 }
 void attiny::dump_config(){
     ESP_LOGCONFIG(TAG, "attiny I2C component");  

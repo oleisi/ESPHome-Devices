@@ -28,7 +28,7 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   void set_enabled(binary_sensor::BinarySensor *sensor) { enabled_ = sensor; }
   
   void deep_sleep();
-  void read_I2C();
+  void read_I2C(bool initial);
   void write_binary(bool value);
   void set_WakeUpRising(bool state){ this->WakeUpRising = state;}
   void set_WakeUpFalling(bool state){ this->WakeUpFalling = state;}
@@ -48,8 +48,15 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   bool SleepI2C;
   bool SleepClock;
   bool LastSleep;
+  bool Enable;
+  bool Enable_old;
+  bool Sensor;
+  bool Sensor_old;
+  bool DeepSleep;
   uint16_t SleepTime;
   uint16_t WakeTime;
+  uint16_t voltage;
+  uint16_t voltage_old;
   uint8_t I2C_Data[9];
 
 

@@ -42,8 +42,8 @@ attiny:
 
 0x01    SleepTime [s] lsb uint16_t
 0x02    SleepTime [s] msb uint16_t
-0x03    SleepTime [s] lsb uint16_t
-0x04    SleepTime [s] msb uint16_t
+0x03    WakeTime [s] lsb uint16_t
+0x04    WakeTime [s] msb uint16_t
 0x05    Voltage [mV] lsb uint16_t
 0x06    Voltage [mV]  msb uint16_t
 

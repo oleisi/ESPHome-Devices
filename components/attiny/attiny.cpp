@@ -24,15 +24,15 @@ void attiny::setup() {
   */ 
      
     uint8_t DataSetup;
-    if (SleepI2C) {DataSetup = DataSetup + 1};
+    if (SleepI2C) {DataSetup = DataSetup + 1;};
     DataSetup = DataSetup << 1;
-    if (SleepClock) {DataSetup = DataSetup + 1};
+    if (SleepClock) {DataSetup = DataSetup + 1;};
     DataSetup = DataSetup << 1;
-    if (WakeUpClock) {DataSetup = DataSetup + 1};
+    if (WakeUpClock) {DataSetup = DataSetup + 1;};
     DataSetup = DataSetup << 1;
-    if (WakeUpFalling) {DataSetup = DataSetup + 1};
+    if (WakeUpFalling) {DataSetup = DataSetup + 1;};
     DataSetup = DataSetup << 1;
-    if (WakeUpRising) {DataSetup = DataSetup + 1};
+    if (WakeUpRising) {DataSetup = DataSetup + 1;};
     ESP_LOGD(TAG, "Datasetup: ");
     ESP_LOGD(TAG, DataSetup);
 };

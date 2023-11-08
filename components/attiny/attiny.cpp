@@ -13,6 +13,7 @@ void attiny::setup() {
   write_I2C_sleep(false);
   read_I2C(true);
   write_I2C_setup();
+  last_time = millis();
   
 };
 
@@ -22,10 +23,12 @@ void attiny::loop() {
 void attiny::update() {
 
   //read_I2C(true);
-  uint32_t ms = millis();
-  delay(1000);
-  uint32_t time = millis() - ms;
-  ESP_LOGE(TAG, "Zeit: %d", time);
+  if ( millis()- last_time > WakeTime*1000){
+    uint32_t differenz = millis()- last_time;
+    last_time = millis();
+    ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
+  }
+
     
 }
 void attiny::dump_config(){

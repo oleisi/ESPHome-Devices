@@ -81,7 +81,7 @@ void attiny::read_I2C(bool initial) {
         }
       }
     ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
-    delay(50);
+    delay(50);//dd
   }
   /*
    // Publish Voltage

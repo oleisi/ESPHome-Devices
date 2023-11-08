@@ -89,7 +89,7 @@ void attiny::read_I2C(bool initial) {
   if (initial || (Voltage != Voltage_new)) {
     Voltage = Voltage_new;
     if (this->voltage_ != nullptr){
-      this->voltage_->publish_state(voltage/1000.0);
+      this->voltage_->publish_state(Voltage/1000.0);
       };
   }
 

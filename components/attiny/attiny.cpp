@@ -98,7 +98,7 @@ void attiny::read_I2C(bool initial) {
   if (initial || Enable != Enable_new) {
     Enable = Enable_new;
     if (this->enabled_ != nullptr) {
-      this->enable_->publish_state(Enable);
+      this->enabled_->publish_state(Enable);
     };
   }
   // Publish Status Pin Sensor

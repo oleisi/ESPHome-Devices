@@ -37,8 +37,12 @@ void attiny::setup() {
       };
     */
     //read_I2C(true);
-    uint8_t Data;
-    if (this->read_register(0x05, &Data, 3) != i2c::ERROR_OK) {
+    uint8_t Data[2];
+    if (this->read_register(0x04, Data, 1) != i2c::ERROR_OK) {
+    ESP_LOGE(TAG, "Attiny I2C Failed");
+    this->mark_failed();
+    };
+    if (this->read_register16(0x05, Data, 2) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
     };

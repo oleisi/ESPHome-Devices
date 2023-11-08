@@ -70,7 +70,6 @@ void attiny::deep_sleep() {
 void attiny::read_I2C(bool initial) {
     // read 0x05 to 0x07
   for (uint8_t i = 5; i<=7; i++){
-    ESP_LOGD(TAG, "Read I2C Register: %d", i );
     uint8_t failures =0;
     while (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       failures++;
@@ -80,8 +79,10 @@ void attiny::read_I2C(bool initial) {
         this->mark_failed();
         }
       }
+    ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
     delay(20);
   }
+  /*
    // Publish Voltage
   uint16_t Voltage_new = I2C_Data[5] | (I2C_Data[6] << 8);
   if (initial || (Voltage != Voltage_new)) {
@@ -106,7 +107,7 @@ void attiny::read_I2C(bool initial) {
     if (this->sensor_ != nullptr) {
       this->sensor_->publish_state(Sensor);
     };
-  }
+  }*/
 }
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);

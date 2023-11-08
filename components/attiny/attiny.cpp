@@ -79,12 +79,6 @@ void attiny::read_I2C(bool initial) {
       if(this->status_has_warning()){
         ESP_LOGD(TAG, "status_has_warning");
       }
-      if(this->status_momentary_error()){
-        ESP_LOGD(TAG, "status_momentary_error");
-      }
-      if(this->status_momentary_warning()){
-        ESP_LOGD(TAG, "status_momentary_warning");
-      }
       if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       ESP_LOGE(TAG, "Failed second attempt to Read I2C Register: %d", i );
       this->mark_failed();

@@ -54,7 +54,6 @@ void attiny::read_I2C(bool initial) {
         this->mark_failed();
         }
       }
-    ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
     delay(50);
   }
   
@@ -118,7 +117,6 @@ void attiny::write_I2C_sleep(bool state) {
   } else{
     I2C_Data[8]= I2C_Data[8] & 0xfe;
   };
-  ESP_LOGE(TAG, "Sleep: %d", I2C_Data[8]);
   uint8_t failures =0;
   while (this->write_register(0x08, &I2C_Data[8], 1) != i2c::ERROR_OK) {
     failures++;

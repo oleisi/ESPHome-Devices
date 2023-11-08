@@ -3,7 +3,9 @@
 #include "esphome.h"
 #include "driver/rtc_io.h"
 #include "esphome/core/time.h"
-
+ #include <cstdlib>
+ #include <ctime>
+ #include <string>
 namespace esphome {
 namespace attiny {
 

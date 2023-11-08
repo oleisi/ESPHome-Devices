@@ -12,7 +12,9 @@
 #include "esphome/components/i2c/i2c.h"
 #include "esphome.h"
 #include "driver/rtc_io.h"
-
+ #include <cstdlib>
+ #include <ctime>
+ #include <string>
 
 namespace esphome {
 namespace attiny {

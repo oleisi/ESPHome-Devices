@@ -73,13 +73,13 @@ void attiny::read_I2C(bool initial) {
     ESP_LOGD(TAG, "Read I2C Register: %d", i );
     if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK) {
       ESP_LOGE(TAG, "Failed first attempt to Read I2C Register: %d", i );
-      delay(5);
+      delay(20);
       if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       ESP_LOGE(TAG, "Failed second attempt to Read I2C Register: %d", i );
       };
     //this->mark_failed();
     };
-  delay(5);
+  delay(10);
   }
  
 

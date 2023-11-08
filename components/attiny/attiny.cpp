@@ -13,7 +13,6 @@ void attiny::setup() {
   write_I2C_sleep(false);
   read_I2C(true);
   write_I2C_setup();
-  last_time = millis();
       if (this->sleep_status_ != nullptr) {
         this->sleep_status_->publish_state(false);
       };
@@ -26,7 +25,7 @@ void attiny::loop() {
 void attiny::update() {
 
   //read_I2C(true);
-  if ( millis() > (WakeTime)*1000 && SleepI2C){
+  if ( millis() > (WakeTime+1) *1000) && SleepI2C){
     write_I2C_sleep(true);
   }
 

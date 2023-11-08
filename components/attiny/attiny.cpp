@@ -72,13 +72,18 @@ void attiny::read_I2C(bool initial) {
   for (uint8_t i = 5; i<=7; i++){
     ESP_LOGD(TAG, "Read I2C Register: %d", i );
     if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK) {
+      uint8_t failures =0;
+      while (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK)
+      {
+        failures++;
+        ESP_LOGE(TAG, "Failed to Read I2C Register: %d, attempt: %d", i, failures);
+        if(failures>20){
+          this->mark_failed();
+        }
+        /* code */
+      }
+      
       delay(10);
-      if(this->status_has_error()){
-        ESP_LOGD(TAG, "status_has_error");
-      }
-      if(this->status_has_warning()){
-        ESP_LOGD(TAG, "status_has_warning");
-      }
       if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       ESP_LOGE(TAG, "Failed second attempt to Read I2C Register: %d", i );
       this->mark_failed();

@@ -37,24 +37,11 @@ void attiny::setup() {
       };
     */
     //read_I2C(true);
-    uint8_t Data[2] = {0, 0};
+    uint8_t Data[3] = {0, 0, 0};
 
-    if (this->read_register(0x01, Data, 1) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny I2C Failed");
-    this->mark_failed();
-    };
-    if (this->read_register16(0x02, Data, 2) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny I2C Failed");
-    this->mark_failed();
-    };
-    if (this->write_register(0x03, Data, 1) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Attiny write Setup Failed");
-      this->mark_failed();
-      };
-    if (this->write_register16(0x4, Data, 2) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Attiny write Setup Failed");
-      this->mark_failed();
-      };
+    read_I2C(0x00, Data, 1);
+    read_I2C(0x02, &Data[1], 2);
+
 };
 
 void attiny::loop() {
@@ -83,7 +70,14 @@ void attiny::write_binary(bool state) {
 void attiny::deep_sleep() {
 
 }
-void attiny::read_I2C(bool initial) {
+void attiny::read_I2C(uint8_t a_register, uint8_t *data, size_t len) {
+  uint8_t length = a_register+len;
+  for (uint8_t i =a_register; i < length; i++){
+    if (this->read_register(i, Data, 1) != i2c::ERROR_OK) {
+      ESP_LOGE(TAG, "Attiny I2C Failed");
+      this->mark_failed();
+    };
+  }
   // read 0x05    Voltage [mV] lsb uint16_t
   /*uint8_t Data [3];
   if (this->read_register(0x05, Data, 3) != i2c::ERROR_OK) {

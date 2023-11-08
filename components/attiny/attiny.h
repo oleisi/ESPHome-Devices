@@ -16,7 +16,7 @@ namespace attiny {
 
 class attiny : public i2c::I2CDevice, public PollingComponent {
  public:
-  attiny() : PollingComponent(1000) {}
+  attiny() : PollingComponent(5000) {}
   float get_setup_priority() const override { return setup_priority::HARDWARE; }
   void setup() override;
   void loop() override;

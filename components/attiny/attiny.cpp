@@ -73,7 +73,7 @@ void attiny::deep_sleep() {
 void attiny::read_I2C(uint8_t a_register, uint8_t *data, size_t len) {
   uint8_t length = a_register+len;
   for (uint8_t i =a_register; i < length; i++){
-    if (this->read_register(i, Data, 1) != i2c::ERROR_OK) {
+    if (this->read_register(i, data, 1) != i2c::ERROR_OK) {
       ESP_LOGE(TAG, "Attiny I2C Failed");
       this->mark_failed();
     };

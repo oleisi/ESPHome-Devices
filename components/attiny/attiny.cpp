@@ -80,7 +80,7 @@ void attiny::read_I2C(bool initial) {
         }
       }
     ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
-    delay(50);//dd
+    delay(50);
   }
   
    // Publish Voltage
@@ -134,15 +134,22 @@ void attiny::write_I2C_setup(){
       this->mark_failed();
       }
     };
+  delay(50);  
 
   /*    
-  while (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
+for (uint8_t i = 5; i<=7; i++){
+    uint8_t failures =0;
+    while (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       failures++;
       ESP_LOGE(TAG, "Failed to Read I2C Register: %d, attempt: %d", i, failures);
       delay(failures+50);
       if(failures>20){
         this->mark_failed();
         }
+      }
+    ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
+    delay(50);
+  }
       }*/
 }
 

@@ -22,7 +22,7 @@ void attiny::loop() {
 void attiny::update() {
 
   //read_I2C(true);
-  long int timestamp = time.timestamp;
+  time_t timestamp = time.timestamp;
   delay(1000);
   uint8_t time = timestamp - time.timestamp;
   ESP_LOGE(TAG, "Zeit: %d", time);

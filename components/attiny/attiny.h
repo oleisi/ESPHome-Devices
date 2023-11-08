@@ -68,6 +68,7 @@ class attinyDeepSleep : public Component, public switch_::Switch {
   void dump_config() override;
   void set_parent(attiny *parent) { this->parent_ = parent; }
   void write_state(bool state) override;
+
  protected:
   
   attiny *parent_;

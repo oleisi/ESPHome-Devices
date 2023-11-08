@@ -28,7 +28,7 @@ void attiny::update() {
     last_time = millis();
     ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
     attinyDeepSleep obj;
-    attinyDeepSleep::write_state(true);
+    obj::write_state(true);
   }
 
     

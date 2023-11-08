@@ -36,13 +36,8 @@ void attiny::setup() {
       this->mark_failed();
       };
     */
-    //read_I2C(true);
-    uint8_t Data[3] = {1, 2, 3};
+    read_I2C(true);
 
-    read_I2C(0x00, Data, 1);
-    read_I2C(0x02, &Data[1], 2);
-    write_I2C(0x05, Data, 1);
-    write_I2C(0x06, &Data[1], 2);
 
 };
 
@@ -72,64 +67,48 @@ void attiny::write_binary(bool state) {
 void attiny::deep_sleep() {
 
 }
-void attiny::read_I2C(uint8_t a_register, uint8_t *data, size_t len) {
-  uint8_t length = a_register+len;
-  for (uint8_t i =a_register; i < length; i++){
-    if (this->read_register(i, data, 1) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Attiny I2C Failed");
-      this->mark_failed();
-    };
-  };
-}
-void attiny::write_I2C(uint8_t a_register, uint8_t *data, size_t len) {
-  uint8_t length = a_register+len;
-  for (uint8_t i =a_register; i < length; i++){
-    if (this->write_register(i, data, 1) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Attiny I2C Failed");
-      this->mark_failed();
-    };
-  };
- 
-  // read 0x05    Voltage [mV] lsb uint16_t
-  /*uint8_t Data [3];
-  if (this->read_register(0x05, Data, 3) != i2c::ERROR_OK) {
+void attiny::read_I2C(bool initial) {
+    // read 0x05    Voltage [mV] lsb uint16_t
+  if (this->read_register(0x05, &Data[1], 1) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
     }:
   // read 0x06    Voltage [mV] msb uint16_t
-  if (this->read_register(0x06, I2C_Data[6], 1) != i2c::ERROR_OK) {
+  if (this->read_register(0x06, &I2C_Data[2], 1) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
     };
+  //read 0x07 Pin Status
+  if (this->read_register(0x07, &I2C_Data[7], 1) != i2c::ERROR_OK) {
+    ESP_LOGE(TAG, "Attiny I2C Failed");
+    this->mark_failed();
+    };
+
   // Publish Voltage
-  voltage = I2C_Data[5] | (I2C_Data[6] << 8);
-  if (initial || (voltage != voltage_old)) {
-    voltage_old = voltage;
+  uint16_t Voltage_new = I2C_Data[5] | (I2C_Data[6] << 8);
+  if (initial || (Voltage != Voltage_new)) {
+    Voltage = Voltage_new;
     if (this->voltage_ != nullptr){
       this->voltage_->publish_state(voltage/1000.0);
       };
-    if (this->read_register(0x07, I2C_Data[7], 1) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Attiny I2C Failed");
-      this->mark_failed();
-      };
-    };
+  }:
 
-  
-  Enable = (I2C_Data[7]& 0x01) == 0x01;
-  if (initial || Enable != Enable_old) {
-    Enable_old = Enable;
+  // Publish Status Pin Enable
+  bool Enable_new = (I2C_Data[7]& 0x01) == 0x01;
+  if (initial || Enable != Enable_new) {
+    Enable = Enable_new;
     if (this->enabled_ != nullptr) {
       this->enable_->publish_state(Enable);
     };
   }
-
-  Sensor = (I2C_Data[7]& 0x02) == 0x02;
-  if (initial || Sensor != Sensor_old) {
-    Sensor_old = Sensor;
+  // Publish Status Pin Sensor
+  bool Sensor_new = (I2C_Data[7]& 0x02) == 0x02;
+  if (initial || Sensor != Sensor_new) {
+    Sensor = Sensor_new;
     if (this->sensor_ != nullptr) {
       this->sensor_->publish_state(Sensor);
     };
-  }*/
+  }
 }
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);

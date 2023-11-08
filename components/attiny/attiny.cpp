@@ -24,7 +24,7 @@ void attiny::update() {
   //read_I2C(true);
   uint32_t ms = millis();
   delay(1000);
-  uint8_t time = millis() - ms;
+  uint32_t time = millis() - ms;
   ESP_LOGE(TAG, "Zeit: %d", time);
     
 }

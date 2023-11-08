@@ -69,24 +69,15 @@ void attiny::deep_sleep() {
 }
 void attiny::read_I2C(bool initial) {
     // read 0x05    Voltage [mV] lsb uint16_t
-  if (this->read_register(0x05,&I2C_Data[5], 1) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny I2C Failed");
+  for (uint8_t i = 5, i<=7, i++){
+    if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK) {
+      ESP_LOGE(TAG, "Attiny I2C Failed");
     //this->mark_failed();
     };
   delay(10);
-  // read 0x06    Voltage [mV] msb uint16_t
-  if (this->read_register(0x06, &I2C_Data[6], 1) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny I2C Failed");
-    //this->mark_failed();
-    };
-  delay(10);
-  ESP_LOGE(TAG, "Attiny I2C test log");
-  //read 0x07 Pin Status
-  if (this->read_register(0x07, &I2C_Data[7], 1) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny I2C Failed");
-    //this->mark_failed();
-    };
-  delay(10);
+  }
+ 
+
 
   // Publish Voltage
   uint16_t Voltage_new = I2C_Data[5] | (I2C_Data[6] << 8);

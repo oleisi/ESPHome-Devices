@@ -56,7 +56,7 @@ void attiny::update() {
     ESP_LOGD(TAG, "DataReciev[5]: %d", DataReciev[0]);
     */
    
-    read_I2C(false);
+    
 }
 void attiny::dump_config(){
     ESP_LOGCONFIG(TAG, "attiny I2C component");  

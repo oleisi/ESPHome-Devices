@@ -148,7 +148,7 @@ void attiny::write_I2C_sleep(bool state) {
   };
   ESP_LOGE(TAG, "Sleep: %d", I2C_Data[8]);
   uint8_t failures =0;
-  while (this->write_register(0x08, I2C_Data[8], 1) != i2c::ERROR_OK) {
+  while (this->write_register(0x08, &I2C_Data[8], 1) != i2c::ERROR_OK) {
     failures++;
     ESP_LOGE(TAG, "Failed to Write I2C Sleep Register, attempt: %d", failures);
     delay(failures+50);

@@ -57,7 +57,7 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   uint16_t SleepTime;
   uint16_t WakeTime;
   uint16_t Voltage;
-  uint8_t I2C_Data[9] = {1,2,3,4,5,6,7,8,9};
+  uint8_t I2C_Data[9] = {0,0,0,0,0,0,0,0,0};
 
 
 };

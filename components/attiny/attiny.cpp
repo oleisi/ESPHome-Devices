@@ -14,9 +14,7 @@ void attiny::setup() {
   read_I2C(true);
   write_I2C_setup();
   last_time = millis();
-  if (this->sensor_ != nullptr) {
-    this->sleep_status_->publish_state(false);
-    };
+  
 };
 
 void attiny::loop() {
@@ -29,10 +27,7 @@ void attiny::update() {
     uint32_t differenz = millis()- last_time;
     last_time = millis();
     ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
-    //write_I2C_sleep(true);
-    /*if (this->sensor_ != nullptr) {
-      this->sleep_status_->publish_state(true);
-      };*/
+    
   }
 
     

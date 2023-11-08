@@ -14,7 +14,7 @@ void attiny::setup() {
   read_I2C(true);
   write_I2C_setup();
   last_time = millis();
-  if (this->sensor_ != nullptr) {
+  if (this->sleep_status_ != nullptr) {
     this->sleep_status_->publish_state(false);
     };
 };

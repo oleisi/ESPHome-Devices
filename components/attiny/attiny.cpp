@@ -18,13 +18,7 @@ void attiny::loop() {
 
 }
 void attiny::update() {
-/*
-  if (this->read_register(0x02, DataReciev, 2) != i2c::ERROR_OK) {
-    ESP_LOGE(TAG, "Attiny read Setup Failed");
-    //this->mark_failed();
-  }
-    ESP_LOGD(TAG, "DataReciev[5]: %d", DataReciev[0]);
-    */
+
   //read_I2C(true);
 
   
@@ -126,7 +120,9 @@ void attiny::write_I2C_sleep(bool state) {
       this->mark_failed();
       }
     };
-    esp_err_t result = esp_sleep_enable_timer_wakeup(1 * 1000 * 1000);
+    if (state)
+    {
+      esp_err_t result = esp_sleep_enable_timer_wakeup(1 * 1000 * 1000);
     if (result != ESP_OK) {
       ESP_LOGE(TAG, "Failed to enable timer wakeup: %d", result);
       return;
@@ -135,6 +131,9 @@ void attiny::write_I2C_sleep(bool state) {
       App.run_safe_shutdown_hooks();
       ESP_LOGE(TAG, "Going too deepsleep");
       esp_deep_sleep_start();
+    };
+    
+    
 }
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);

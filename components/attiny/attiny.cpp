@@ -131,6 +131,7 @@ void attiny::write_I2C_sleep(bool state) {
       }
       delay(500); // Allow last messages to be sent over MQTT
       App.run_safe_shutdown_hooks();
+      ESP_LOGE(TAG, "Going too deepsleep");
       esp_deep_sleep_start();
     }
   delay(50);

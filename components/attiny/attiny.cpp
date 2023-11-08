@@ -124,6 +124,15 @@ void attiny::write_I2C_sleep(bool state) {
       this->mark_failed();
       }
     };
+    esp_err_t result = esp_sleep_enable_timer_wakeup(1 * 1000 * 1000);
+    if (result != ESP_OK) {
+      ESP_LOGE(TAG, "Failed to enable timer wakeup: %d", result);
+      return;
+      }
+      delay(500); // Allow last messages to be sent over MQTT
+      App.run_safe_shutdown_hooks();
+      esp_deep_sleep_start();
+    }
   delay(50);
 }
 void attinyDeepSleep::dump_config() {
@@ -133,7 +142,6 @@ void attinyDeepSleep::dump_config() {
 void attinyDeepSleep::write_state(bool state) {
   this->publish_state(state);
   this->parent_->write_I2C_sleep(state);
-
 }
 
 }  // namespace empty_i2c_component

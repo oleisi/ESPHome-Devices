@@ -2,6 +2,7 @@
 #include "attiny.h"
 #include "esphome.h"
 #include "driver/rtc_io.h"
+#include "esphome/core/time.h"
 
 namespace esphome {
 namespace attiny {
@@ -9,9 +10,10 @@ namespace attiny {
 static const char *TAG = "attiny";
 
 void attiny::setup() {
-  write_I2C_setup();
-  read_I2C(true);
   write_I2C_sleep(false);
+  read_I2C(true);
+  write_I2C_setup();
+  
 };
 
 void attiny::loop() {
@@ -20,8 +22,8 @@ void attiny::loop() {
 void attiny::update() {
 
   //read_I2C(true);
-
-  
+  time_t timestamp = time.timestamp
+  //ESP_LOGE(TAG, "Zeit: %");
     
 }
 void attiny::dump_config(){
@@ -122,7 +124,7 @@ void attiny::write_I2C_sleep(bool state) {
     };
     if (state)
     {
-      esp_err_t result = esp_sleep_enable_timer_wakeup((SleepTime+10) * 1000 * 1000);
+      esp_err_t result = esp_sleep_enable_timer_wakeup((SleepTime) * 1000 * 1000);
     if (result != ESP_OK) {
       ESP_LOGE(TAG, "Failed to enable timer wakeup: %d", result);
       return;

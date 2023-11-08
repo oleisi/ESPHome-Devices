@@ -71,6 +71,7 @@ void attiny::read_I2C(bool initial) {
     // read 0x05 to 0x07
   for (uint8_t i = 5; i<=7; i++){
     uint8_t failures =0;
+    I2C_Data[i] = 0;
     while (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       failures++;
       ESP_LOGE(TAG, "Failed to Read I2C Register: %d, attempt: %d", i, failures);

@@ -27,7 +27,7 @@ void attiny::update() {
     uint32_t differenz = millis()- last_time;
     last_time = millis();
     ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
-    this->attinyDeepSleep->write_state(true);
+    esphome::attiny::attinyDeepSleep::write_state(true);
   }
 
     

@@ -24,7 +24,7 @@ void attiny::loop() {
 }
 void attiny::update() {
 
-  read_I2C(false);
+  //read_I2C(false);
   if ( millis()- last_time > WakeTime*1000){
     uint32_t differenz = millis()- last_time;
     last_time = millis();

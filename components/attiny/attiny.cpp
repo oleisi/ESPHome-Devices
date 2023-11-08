@@ -3,7 +3,7 @@
 #include "esphome.h"
 #include "driver/rtc_io.h"
 #include "esphome/core/time.h"
-#include <real_time_clock.h>
+#include "esphome/core/time/real_time_clock.h"
 
 namespace esphome {
 namespace attiny {

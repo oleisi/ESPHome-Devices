@@ -68,23 +68,21 @@ void attiny::deep_sleep() {
 
 }
 void attiny::read_I2C(bool initial) {
-    // read 0x05    Voltage [mV] lsb uint16_t
+    // read 0x05 to 0x07
   for (uint8_t i = 5; i<=7; i++){
     ESP_LOGD(TAG, "Read I2C Register: %d", i );
     if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Failed first attempt to Read I2C Register: %d", i );
-      delay(20);
+      delay(10);
+
       if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       ESP_LOGE(TAG, "Failed second attempt to Read I2C Register: %d", i );
+      this->mark_failed();
       };
-    //this->mark_failed();
+    
     };
   delay(10);
   }
- 
-
-
-  // Publish Voltage
+   // Publish Voltage
   uint16_t Voltage_new = I2C_Data[5] | (I2C_Data[6] << 8);
   if (initial || (Voltage != Voltage_new)) {
     Voltage = Voltage_new;

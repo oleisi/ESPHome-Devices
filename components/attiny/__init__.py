@@ -22,6 +22,7 @@ CONF_VOLTAGE = "Voltage"
 CONF_SENSOR = "Sensor"
 CONF_ENABLED = "Enabled"
 CONF_DEEPSLEEP = "DeepSleep"
+CONF_DEEPSLEEP_STATUS = "DeepSleepStatus"
 PAR_WAKE_UP_RISING = "WakeUpRising"
 PAR_WAKE_UP_FALLING = "WakeUpFalling"
 PAR_WAKE_UP_CLOCK = "WakeUpClock"
@@ -49,6 +50,7 @@ CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend(
         cv.Optional(PAR_WAKE_TIME, default=1): cv.int_range(min=0, max=65535),
         cv.Optional(CONF_SENSOR): binary_sensor.binary_sensor_schema(),
         cv.Optional(CONF_ENABLED): binary_sensor.binary_sensor_schema(),
+        cv.Optional(CONF_DEEPSLEEP_STATUS): binary_sensor.binary_sensor_schema(),
         cv.Optional(CONF_DEEPSLEEP): switch.SWITCH_SCHEMA.extend({cv.GenerateID(): cv.declare_id(attinyDeepSleep)}),
     }
 ).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
@@ -78,6 +80,10 @@ async def to_code(config):
     if CONF_ENABLED in config:
         sens = await binary_sensor.new_binary_sensor(config[CONF_ENABLED])
         cg.add(var.set_enabled(sens))
+        
+    if CONF_DEEPSLEEP_STATUS in config:
+        sens = await binary_sensor.new_binary_sensor(config[CONF_DEEPSLEEP_STATUS])
+        cg.add(var.set_sleep_status(sens))
     
     if CONF_DEEPSLEEP in config:
         sw = await switch.new_switch(config[CONF_DEEPSLEEP])

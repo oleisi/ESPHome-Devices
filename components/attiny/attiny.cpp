@@ -7,39 +7,9 @@ namespace attiny {
 static const char *TAG = "attiny";
 
 void attiny::setup() {
-    // Tests
-    /*
-    this->enabled_->publish_state(true);
-        if (this->voltage_ != nullptr){
-    this->voltage_->publish_state(get_SleepTime/1000.0);
-    };
-    get_SleepTime = get_SleepTime+10;
-
-  */ 
-   /*
-    I2C_Data[0] = 0;
-    if (SleepI2C) {I2C_Data[0] = I2C_Data[0] + 1;};
-    I2C_Data[0] = I2C_Data[0] << 1;
-    if (SleepClock) {I2C_Data[0] = I2C_Data[0] + 1;};
-    I2C_Data[0] = I2C_Data[0] << 1;
-    if (WakeUpClock) {I2C_Data[0] = I2C_Data[0] + 1;};
-    I2C_Data[0] = I2C_Data[0] << 1;
-    if (WakeUpFalling) {I2C_Data[0] = I2C_Data[0] + 1;};
-    I2C_Data[0] = I2C_Data[0] << 1;
-    if (WakeUpRising) {I2C_Data[0] = I2C_Data[0] + 1;};
-    I2C_Data[1] = SleepTime & 0xff;
-    I2C_Data[2] = (SleepTime >> 8) & 0xff;
-    I2C_Data[3] = WakeTime & 0xff;
-    I2C_Data[4] = (WakeTime >> 8) & 0xff;
-    if (this->write_register(0x00, I2C_Data, 5) != i2c::ERROR_OK) {
-      ESP_LOGE(TAG, "Attiny write Setup Failed");
-      this->mark_failed();
-      };
-    */
   write_I2C_setup();
   read_I2C(true);
-
-
+  write_I2C_sleep(false);
 };
 
 void attiny::loop() {
@@ -53,11 +23,9 @@ void attiny::update() {
   }
     ESP_LOGD(TAG, "DataReciev[5]: %d", DataReciev[0]);
     */
-  write_I2C_setup();
-  read_I2C(false);
-  write_I2C_sleep(false);
-  delay(100);
-  write_I2C_sleep(true);
+  read_I2C(true);
+
+  
     
 }
 void attiny::dump_config(){
@@ -163,8 +131,8 @@ void attinyDeepSleep::dump_config() {
 }
 
 void attinyDeepSleep::write_state(bool state) {
-  this->parent_->write_binary(state);
   this->publish_state(state);
+  this->parent_->write_I2C_sleep(state);
 
 }
 

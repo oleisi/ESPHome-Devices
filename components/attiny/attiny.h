@@ -12,7 +12,6 @@
 #include "esphome/components/i2c/i2c.h"
 #include "esphome.h"
 #include "driver/rtc_io.h"
-#include "esphome/esphome/components/time/real_time_clock.h"
 
 namespace esphome {
 namespace attiny {

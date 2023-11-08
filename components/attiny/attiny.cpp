@@ -79,9 +79,9 @@ void attiny::read_I2C(uint8_t a_register, uint8_t *data, size_t len) {
       ESP_LOGE(TAG, "Attiny I2C Failed");
       this->mark_failed();
     };
-  }
+  };
 }
-void attiny::write_I2C(uint8_t a_register, const uint8_t *data, size_t len) {
+void attiny::write_I2C(uint8_t a_register, uint8_t *data, size_t len) {
   uint8_t length = a_register+len;
   for (uint8_t i =a_register; i < length; i++){
     if (this->write_register(i, data, 1) != i2c::ERROR_OK) {

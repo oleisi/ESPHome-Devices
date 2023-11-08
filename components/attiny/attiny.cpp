@@ -80,6 +80,7 @@ void attiny::read_I2C(bool initial) {
     //this->mark_failed();
     };
   delay(10);
+  ESP_LOGE(TAG, "Attiny I2C test log");
   //read 0x07 Pin Status
   if (this->read_register(0x07, &I2C_Data[7], 1) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");

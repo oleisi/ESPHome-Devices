@@ -27,9 +27,6 @@ void attiny::update() {
 
   //read_I2C(true);
   if ( millis()- last_time > WakeTime*1000){
-      if (this->sleep_status_ != nullptr) {
-        this->sleep_status_->publish_state(true);
-      };
     uint32_t differenz = millis()- last_time;
     last_time = millis();
     ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
@@ -132,8 +129,10 @@ void attiny::write_I2C_sleep(bool state) {
       this->mark_failed();
       }
     };
-    if (state)
-    {
+    if (state){
+      if (this->sleep_status_ != nullptr) {
+        this->sleep_status_->publish_state(state);
+      };
       esp_err_t result = esp_sleep_enable_timer_wakeup((SleepTime) * 1000 * 1000);
     if (result != ESP_OK) {
       ESP_LOGE(TAG, "Failed to enable timer wakeup: %d", result);

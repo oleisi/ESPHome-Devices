@@ -72,7 +72,7 @@ void attiny::read_I2C(bool initial) {
   if (this->read_register(0x05,&I2C_Data[1], 1) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
-    }:
+    };
   // read 0x06    Voltage [mV] msb uint16_t
   if (this->read_register(0x06, &I2C_Data[2], 1) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
@@ -91,7 +91,7 @@ void attiny::read_I2C(bool initial) {
     if (this->voltage_ != nullptr){
       this->voltage_->publish_state(voltage/1000.0);
       };
-  }:
+  }
 
   // Publish Status Pin Enable
   bool Enable_new = (I2C_Data[7]& 0x01) == 0x01;

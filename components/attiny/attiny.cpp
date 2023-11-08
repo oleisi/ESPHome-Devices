@@ -8,7 +8,7 @@ namespace esphome {
 namespace attiny {
 
 static const char *TAG = "attiny";
-
+attinyDeepSleep obj;
 void attiny::setup() {
   write_I2C_sleep(false);
   read_I2C(true);
@@ -27,8 +27,8 @@ void attiny::update() {
     uint32_t differenz = millis()- last_time;
     last_time = millis();
     ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
-    //attinyDeepSleep obj;
-    //obj.write_state(true);
+    
+    obj.write_state(true);
   }
 
     

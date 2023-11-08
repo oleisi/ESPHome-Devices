@@ -77,13 +77,14 @@ void attiny::read_I2C(bool initial) {
       {
         failures++;
         ESP_LOGE(TAG, "Failed to Read I2C Register: %d, attempt: %d", i, failures);
+        delay(failures);
         if(failures>20){
           this->mark_failed();
         }
         /* code */
       }
       
-      delay(10);
+      
       if (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
       ESP_LOGE(TAG, "Failed second attempt to Read I2C Register: %d", i );
       this->mark_failed();

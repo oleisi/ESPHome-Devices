@@ -3,9 +3,8 @@
 #include "esphome.h"
 #include "driver/rtc_io.h"
 #include "esphome/core/time.h"
- #include <cstdlib>
- #include <ctime>
- #include <string>
+#include <real_time_clock.h>
+
 namespace esphome {
 namespace attiny {
 
@@ -24,9 +23,9 @@ void attiny::loop() {
 void attiny::update() {
 
   //read_I2C(true);
-  time_t timestamp = time.timestamp;
+  uint36_t timestamp = timestamp_now();
   delay(1000);
-  uint8_t time = timestamp - time.timestamp;
+  uint8_t time = timestamp - timestamp_now();
   ESP_LOGE(TAG, "Zeit: %d", time);
     
 }

@@ -55,6 +55,9 @@ void attiny::update() {
     */
   write_I2C_setup();
   read_I2C(false);
+  write_I2C_sleep(false);
+  delay(100);
+  write_I2C_sleep(true);
     
 }
 void attiny::dump_config(){
@@ -134,27 +137,25 @@ void attiny::write_I2C_setup(){
       this->mark_failed();
       }
     };
-  delay(50);  
-
-  /*    
-for (uint8_t i = 5; i<=7; i++){
-    uint8_t failures =0;
-    while (this->read_register(i,&I2C_Data[i], 1) != i2c::ERROR_OK){
-      failures++;
-      ESP_LOGE(TAG, "Failed to Read I2C Register: %d, attempt: %d", i, failures);
-      delay(failures+50);
-      if(failures>20){
-        this->mark_failed();
-        }
-      }
-    ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
-    delay(50);
-  }
-      }*/
+  delay(50);
 }
 
-void attiny::write_I2C_sleep() {
-
+void attiny::write_I2C_sleep(bool state) {
+  if (state == true){
+    I2C_Data[8]= I2C_Data[8] | 1;
+  } else{
+    I2C_Data[8]= I2C_Data[8] & 0xfe;
+  };
+  ESP_LOGE(TAG, "Sleep: %d", I2C_Data[8]);
+  while (this->write_register(0x08, I2C_Data, 1) != i2c::ERROR_OK) {
+    failures++;
+    ESP_LOGE(TAG, "Failed to Write I2C Sleep Register, attempt: %d", failures);
+    delay(failures+50);
+    if(failures>20){
+      this->mark_failed();
+      }
+    };
+  delay(50);
 }
 void attinyDeepSleep::dump_config() {
   LOG_SWITCH("", "UART Demo Switch", this);

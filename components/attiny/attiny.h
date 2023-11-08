@@ -29,7 +29,7 @@ class attiny : public i2c::I2CDevice, public PollingComponent {
   
   void deep_sleep();
   void read_I2C(uint8_t a_register, uint8_t *data, size_t len);
-  void write_I2C_(uint8_t a_register, const uint8_t *data, size_t len);
+  void write_I2C(uint8_t a_register, const uint8_t *data, size_t len);
   void write_binary(bool value);
   void set_WakeUpRising(bool state){ this->WakeUpRising = state;}
   void set_WakeUpFalling(bool state){ this->WakeUpFalling = state;}

@@ -26,11 +26,8 @@ void attiny::loop() {
 void attiny::update() {
 
   //read_I2C(true);
-  if ( millis()- last_time > WakeTime*1000){
-    uint32_t differenz = millis()- last_time;
-    last_time = millis();
-    ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
-    
+  if ( millis() > (WakeTime)*1000 && SleepI2C){
+    write_I2C_sleep(true);
   }
 
     

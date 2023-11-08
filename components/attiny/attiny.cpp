@@ -87,7 +87,8 @@ void attiny::write_I2C(uint8_t a_register, const uint8_t *data, size_t len) {
       ESP_LOGE(TAG, "Attiny I2C Failed");
       this->mark_failed();
     };
-  }  
+  };
+}  
   // read 0x05    Voltage [mV] lsb uint16_t
   /*uint8_t Data [3];
   if (this->read_register(0x05, Data, 3) != i2c::ERROR_OK) {

@@ -9,6 +9,8 @@
 #include "esphome/components/switch/switch.h"
 #include "esphome/components/text_sensor/text_sensor.h"
 #include "esphome/components/i2c/i2c.h"
+#include "esphome.h"
+#include "driver/rtc_io.h"
 
 
 namespace esphome {

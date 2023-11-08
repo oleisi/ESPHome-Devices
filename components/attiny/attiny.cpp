@@ -37,15 +37,24 @@ void attiny::setup() {
       };
     */
     //read_I2C(true);
-    uint8_t Data[2];
-    if (this->read_register(0x04, Data, 2) != i2c::ERROR_OK) {
+    uint8_t Data[2] = {0, 0};
+
+    if (this->read_register(0x01, Data, 1) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
     };
-    if (this->read_register16(0x05, Data, 4) != i2c::ERROR_OK) {
+    if (this->read_register16(0x02, Data, 2) != i2c::ERROR_OK) {
     ESP_LOGE(TAG, "Attiny I2C Failed");
     this->mark_failed();
     };
+    if (this->write_register(0x03, Data, 1) != i2c::ERROR_OK) {
+      ESP_LOGE(TAG, "Attiny write Setup Failed");
+      this->mark_failed();
+      };
+    if (this->write_register16(0x4, Data, 2) != i2c::ERROR_OK) {
+      ESP_LOGE(TAG, "Attiny write Setup Failed");
+      this->mark_failed();
+      };
 };
 
 void attiny::loop() {

@@ -14,7 +14,7 @@ void attiny::setup() {
   read_I2C(true);
   write_I2C_setup();
   last_time = millis();
-  if (this->sleep_status_ != nullptr) {
+  if (this->sensor_ != nullptr) {
     this->sleep_status_->publish_state(false);
     };
 };
@@ -24,11 +24,15 @@ void attiny::loop() {
 }
 void attiny::update() {
 
-  //read_I2C(false);
+  //read_I2C(true);
   if ( millis()- last_time > WakeTime*1000){
     uint32_t differenz = millis()- last_time;
     last_time = millis();
+    ESP_LOGE(TAG, "Zeit: %d, Differenz: %d", millis(), differenz);
     //write_I2C_sleep(true);
+    /*if (this->sensor_ != nullptr) {
+      this->sleep_status_->publish_state(true);
+      };*/
   }
 
     
@@ -55,6 +59,7 @@ void attiny::read_I2C(bool initial) {
         this->mark_failed();
         }
       }
+    ESP_LOGD(TAG, "Read I2C Register: %d, Value: %d", i , I2C_Data[i] );
     delay(50);
   }
   
@@ -118,6 +123,7 @@ void attiny::write_I2C_sleep(bool state) {
   } else{
     I2C_Data[8]= I2C_Data[8] & 0xfe;
   };
+  ESP_LOGE(TAG, "Sleep: %d", I2C_Data[8]);
   uint8_t failures =0;
   while (this->write_register(0x08, &I2C_Data[8], 1) != i2c::ERROR_OK) {
     failures++;
@@ -136,10 +142,7 @@ void attiny::write_I2C_sleep(bool state) {
       }
       delay(50); // Allow last messages to be sent over MQTT
       App.run_safe_shutdown_hooks();
-      if (this->sensor_ != nullptr) {
-        this->sleep_status_->publish_state(true);
-        };
-      ESP_LOGD(TAG, "Going too deepsleep");
+      ESP_LOGE(TAG, "Going too deepsleep");
       esp_deep_sleep_start();
     };
     
